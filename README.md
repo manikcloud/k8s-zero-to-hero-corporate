@@ -36,8 +36,9 @@ Git Fundamentals → Docker Mastery → Cloud Basics → Kubernetes Expert → P
 | [13](./session-13-k8s-cicd-gitops/) | CI/CD Integration & GitOps | 4 hours | Advanced |
 | [14](./session-14-k8s-production-best-practices/) | Production Deployment & Best Practices | 4 hours | Expert |
 | [15](./session-15-capstone-project/) | Capstone Project & Certification Prep | 6 hours | Expert |
+| [16](./session-16-sidecar-pattern-istio/) | Sidecar Pattern & Istio Service Mesh | 4 hours | Expert |
 
-**Total Duration**: ~54 hours of comprehensive learning
+**Total Duration**: ~58 hours of comprehensive learning
 
 ---
 
@@ -124,12 +125,13 @@ By the end of this course, you will be able to:
 - [💾 Storage & Config](./session-09-k8s-storage-configmaps/) - Data persistence
 - [🎯 Advanced Concepts](./session-10-k8s-advanced-concepts/) - Scheduling and scaling
 
-### **Production Ready (Sessions 11-15)**
+### **Production Ready (Sessions 11-16)**
 - [📊 Monitoring & Logging](./session-11-k8s-monitoring-logging/) - Observability stack
 - [🔒 Security & RBAC](./session-12-k8s-security-rbac/) - Security best practices
 - [🔄 CI/CD & GitOps](./session-13-k8s-cicd-gitops/) - Automation pipelines
 - [🏭 Production Best Practices](./session-14-k8s-production-best-practices/) - Enterprise deployment
 - [🎓 Capstone Project](./session-15-capstone-project/) - Real-world application
+- [🔗 Sidecar Pattern & Istio](./session-16-sidecar-pattern-istio/) - Service mesh implementation
 
 ---
 

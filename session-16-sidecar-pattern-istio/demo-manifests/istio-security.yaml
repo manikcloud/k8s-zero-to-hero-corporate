@@ -1,0 +1,63 @@
+# PeerAuthentication - Enable mTLS
+apiVersion: security.istio.io/v1beta1
+kind: PeerAuthentication
+metadata:
+  name: default
+  namespace: default
+spec:
+  mtls:
+    mode: STRICT
+---
+# AuthorizationPolicy - Allow specific operations
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: httpd-authz
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: httpd
+  rules:
+  - from:
+    - source:
+        principals: ["cluster.local/ns/default/sa/default"]
+  - to:
+    - operation:
+        methods: ["GET", "POST"]
+        paths: ["/*"]
+  - when:
+    - key: source.ip
+      notValues: ["192.168.1.100"] # Block specific IP
+---
+# RequestAuthentication - JWT validation (optional)
+apiVersion: security.istio.io/v1beta1
+kind: RequestAuthentication
+metadata:
+  name: httpd-jwt
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: httpd
+  jwtRules:
+  - issuer: "https://accounts.google.com"
+    jwksUri: "https://www.googleapis.com/oauth2/v3/certs"
+    audiences:
+    - "your-client-id.apps.googleusercontent.com"
+---
+# ServiceMonitor for Prometheus (if using Prometheus Operator)
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: httpd-metrics
+  labels:
+    app: httpd
+spec:
+  selector:
+    matchLabels:
+      app: httpd
+  endpoints:
+  - port: http-monitoring
+    interval: 30s
+    path: /stats/prometheus
