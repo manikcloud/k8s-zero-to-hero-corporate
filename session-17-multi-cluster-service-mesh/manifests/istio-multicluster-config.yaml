@@ -1,0 +1,293 @@
+# Istio Multi-Cluster Configuration Manifests
+
+---
+# East-West Gateway for Cross-Cluster Communication
+apiVersion: install.istio.io/v1alpha1
+kind: IstioOperator
+metadata:
+  name: eastwest
+  namespace: istio-system
+spec:
+  revision: ""
+  components:
+    ingressGateways:
+      - name: istio-eastwestgateway
+        label:
+          istio: eastwestgateway
+          app: istio-eastwestgateway
+        enabled: true
+        k8s:
+          service:
+            type: LoadBalancer
+            ports:
+              - port: 15021
+                targetPort: 15021
+                name: status-port
+                protocol: TCP
+              - port: 15012
+                targetPort: 15012
+                name: tls
+                protocol: TCP
+              - port: 15017
+                targetPort: 15017
+                name: tls-istiod
+                protocol: TCP
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 200m
+              memory: 256Mi
+          hpaSpec:
+            minReplicas: 2
+            maxReplicas: 5
+            targetCPUUtilizationPercentage: 80
+
+---
+# Gateway for Cross-Network Access
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: cross-network-gateway
+  namespace: istio-system
+spec:
+  selector:
+    istio: eastwestgateway
+  servers:
+    - port:
+        number: 15012
+        name: tls
+        protocol: TLS
+      tls:
+        mode: ISTIO_MUTUAL
+      hosts:
+        - "*.local"
+
+---
+# ServiceEntry for Cross-Cluster Service Discovery (Primary -> Remote)
+apiVersion: networking.istio.io/v1beta1
+kind: ServiceEntry
+metadata:
+  name: helloworld-remote
+  namespace: sample
+spec:
+  hosts:
+  - helloworld.sample.global
+  location: MESH_EXTERNAL
+  ports:
+  - number: 5000
+    name: http
+    protocol: HTTP
+  resolution: DNS
+  addresses:
+  - 240.0.0.1  # Virtual IP for remote cluster services
+  endpoints:
+  - address: helloworld.sample.svc.cluster.local
+    network: network2
+    ports:
+      http: 5000
+
+---
+# ServiceEntry for Cross-Cluster Service Discovery (Remote -> Primary)
+apiVersion: networking.istio.io/v1beta1
+kind: ServiceEntry
+metadata:
+  name: helloworld-primary
+  namespace: sample
+spec:
+  hosts:
+  - helloworld.sample.global
+  location: MESH_EXTERNAL
+  ports:
+  - number: 5000
+    name: http
+    protocol: HTTP
+  resolution: DNS
+  addresses:
+  - 240.0.0.2  # Virtual IP for primary cluster services
+  endpoints:
+  - address: helloworld.sample.svc.cluster.local
+    network: network1
+    ports:
+      http: 5000
+
+---
+# DestinationRule for Cross-Cluster Traffic Management
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: helloworld-destination-rule
+  namespace: sample
+spec:
+  host: helloworld.sample.global
+  trafficPolicy:
+    tls:
+      mode: ISTIO_MUTUAL
+    connectionPool:
+      tcp:
+        maxConnections: 100
+        connectTimeout: 10s
+        keepAlive:
+          time: 7200s
+          interval: 75s
+      http:
+        http1MaxPendingRequests: 100
+        http2MaxRequests: 100
+        maxRequestsPerConnection: 10
+        maxRetries: 3
+        consecutiveGatewayErrors: 5
+        interval: 30s
+        baseEjectionTime: 30s
+    loadBalancer:
+      simple: ROUND_ROBIN
+    outlierDetection:
+      consecutiveErrors: 3
+      interval: 30s
+      baseEjectionTime: 30s
+      maxEjectionPercent: 50
+      minHealthPercent: 50
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+    trafficPolicy:
+      portLevelSettings:
+      - port:
+          number: 5000
+        connectionPool:
+          tcp:
+            maxConnections: 50
+  - name: v2
+    labels:
+      version: v2
+    trafficPolicy:
+      portLevelSettings:
+      - port:
+          number: 5000
+        connectionPool:
+          tcp:
+            maxConnections: 50
+
+---
+# VirtualService for Cross-Cluster Traffic Routing
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: helloworld-virtual-service
+  namespace: sample
+spec:
+  hosts:
+  - helloworld.sample.global
+  http:
+  # Route for canary testing
+  - match:
+    - headers:
+        canary:
+          exact: "true"
+    route:
+    - destination:
+        host: helloworld.sample.global
+        subset: v2
+      weight: 100
+    fault:
+      delay:
+        percentage:
+          value: 0.1
+        fixedDelay: 2s
+  # Route for version-specific requests
+  - match:
+    - headers:
+        version:
+          exact: "v1"
+    route:
+    - destination:
+        host: helloworld.sample.global
+        subset: v1
+      weight: 100
+  - match:
+    - headers:
+        version:
+          exact: "v2"
+    route:
+    - destination:
+        host: helloworld.sample.global
+        subset: v2
+      weight: 100
+  # Default traffic splitting
+  - route:
+    - destination:
+        host: helloworld.sample.global
+        subset: v1
+      weight: 50
+    - destination:
+        host: helloworld.sample.global
+        subset: v2
+      weight: 50
+    retries:
+      attempts: 3
+      perTryTimeout: 2s
+      retryOn: 5xx,reset,connect-failure,refused-stream
+
+---
+# PeerAuthentication for mTLS
+apiVersion: security.istio.io/v1beta1
+kind: PeerAuthentication
+metadata:
+  name: default
+  namespace: sample
+spec:
+  mtls:
+    mode: STRICT
+
+---
+# AuthorizationPolicy for Cross-Cluster Access
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: helloworld-authz
+  namespace: sample
+spec:
+  selector:
+    matchLabels:
+      app: helloworld
+  rules:
+  - from:
+    - source:
+        principals: ["cluster.local/ns/sample/sa/sleep"]
+        namespaces: ["sample"]
+  - to:
+    - operation:
+        methods: ["GET", "POST"]
+        paths: ["/hello"]
+  - when:
+    - key: source.cluster
+      values: ["primary", "remote"]
+
+---
+# Telemetry Configuration for Multi-Cluster Observability
+apiVersion: telemetry.istio.io/v1alpha1
+kind: Telemetry
+metadata:
+  name: multi-cluster-metrics
+  namespace: sample
+spec:
+  metrics:
+  - providers:
+    - name: prometheus
+  - overrides:
+    - match:
+        metric: ALL_METRICS
+      tagOverrides:
+        source_cluster:
+          operation: UPSERT
+          value: "%{SOURCE_CLUSTER}"
+        destination_cluster:
+          operation: UPSERT
+          value: "%{DESTINATION_CLUSTER}"
+  tracing:
+  - providers:
+    - name: jaeger
+  accessLogging:
+  - providers:
+    - name: otel

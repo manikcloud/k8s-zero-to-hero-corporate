@@ -1,0 +1,200 @@
+# Multi-Cluster Kubernetes Setup Manifests
+# This file contains all the necessary manifests for setting up multi-cluster Kubernetes with Istio
+
+---
+# Namespace for sample applications
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: sample
+  labels:
+    istio-injection: enabled
+    cluster-role: application
+
+---
+# HelloWorld Application v1 (Primary Cluster)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: helloworld-v1
+  namespace: sample
+  labels:
+    app: helloworld
+    version: v1
+    cluster: primary
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: helloworld
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: helloworld
+        version: v1
+        cluster: primary
+      annotations:
+        sidecar.istio.io/inject: "true"
+    spec:
+      containers:
+      - name: helloworld
+        image: docker.io/istio/examples-helloworld-v1
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "200m"
+            memory: "256Mi"
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 5000
+        env:
+        - name: SERVICE_VERSION
+          value: v1
+        - name: CLUSTER_NAME
+          value: primary
+        livenessProbe:
+          httpGet:
+            path: /hello
+            port: 5000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /hello
+            port: 5000
+          initialDelaySeconds: 5
+          periodSeconds: 5
+
+---
+# HelloWorld Application v2 (Remote Cluster)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: helloworld-v2
+  namespace: sample
+  labels:
+    app: helloworld
+    version: v2
+    cluster: remote
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: helloworld
+      version: v2
+  template:
+    metadata:
+      labels:
+        app: helloworld
+        version: v2
+        cluster: remote
+      annotations:
+        sidecar.istio.io/inject: "true"
+    spec:
+      containers:
+      - name: helloworld
+        image: docker.io/istio/examples-helloworld-v2
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "200m"
+            memory: "256Mi"
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 5000
+        env:
+        - name: SERVICE_VERSION
+          value: v2
+        - name: CLUSTER_NAME
+          value: remote
+        livenessProbe:
+          httpGet:
+            path: /hello
+            port: 5000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /hello
+            port: 5000
+          initialDelaySeconds: 5
+          periodSeconds: 5
+
+---
+# Service for HelloWorld
+apiVersion: v1
+kind: Service
+metadata:
+  name: helloworld
+  namespace: sample
+  labels:
+    app: helloworld
+    service: helloworld
+spec:
+  ports:
+  - port: 5000
+    name: http
+    protocol: TCP
+    targetPort: 5000
+  selector:
+    app: helloworld
+  type: ClusterIP
+
+---
+# Sleep Pod for Testing
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sleep
+  namespace: sample
+  labels:
+    app: sleep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sleep
+  template:
+    metadata:
+      labels:
+        app: sleep
+      annotations:
+        sidecar.istio.io/inject: "true"
+    spec:
+      containers:
+      - name: sleep
+        image: curlimages/curl
+        command: ["/bin/sleep", "infinity"]
+        imagePullPolicy: IfNotPresent
+        resources:
+          requests:
+            cpu: "50m"
+            memory: "64Mi"
+          limits:
+            cpu: "100m"
+            memory: "128Mi"
+
+---
+# ServiceAccount for applications
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: helloworld
+  namespace: sample
+  labels:
+    account: helloworld
+
+---
+# ServiceAccount for sleep
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: sleep
+  namespace: sample
+  labels:
+    account: sleep
