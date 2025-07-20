@@ -1,5 +1,7 @@
 # VMware Origins and Evolution
 
+![Virtualization Technology Evolution](./diagrams/02_virtualization_evolution.svg)
+
 ## 🎓 Stanford University Research Foundation (1995-1998)
 
 ### The Research Team

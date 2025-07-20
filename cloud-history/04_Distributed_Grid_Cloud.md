@@ -456,6 +456,8 @@ Container Evolution:
 
 ### The Container Revolution: Bridging VMs and Serverless (2013-Present)
 
+![Container Evolution Timeline](./diagrams/03_container_evolution.svg)
+
 #### Container Technology Genesis and Evolution
 ```
 Container Technology Timeline:

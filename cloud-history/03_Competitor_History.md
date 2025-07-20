@@ -62,6 +62,9 @@ Research Motivation: Create a high-performance hypervisor that:
 ### Cloud Platform Adoption
 
 #### Amazon Web Services (2006-2017)
+
+![AWS Hypervisor Evolution](./diagrams/04_aws_hypervisor_evolution.svg)
+
 ```
 AWS Xen Implementation Timeline:
 2006: EC2 launch with Xen hypervisor

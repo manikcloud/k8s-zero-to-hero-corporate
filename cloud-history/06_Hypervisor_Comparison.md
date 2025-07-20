@@ -1,5 +1,7 @@
 # Comprehensive Hypervisor Comparison Matrix
 
+![Cloud Platform Hypervisor Comparison](./diagrams/05_cloud_platform_comparison.svg)
+
 ## 🔍 Executive Summary
 
 This comprehensive comparison analyzes the major hypervisor technologies that form the foundation of modern cloud computing infrastructure, examining their technical characteristics, market adoption, and real-world implementations across major cloud platforms.

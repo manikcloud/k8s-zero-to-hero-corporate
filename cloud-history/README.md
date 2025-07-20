@@ -6,6 +6,8 @@ This archive provides a comprehensive technical and historical analysis of how v
 
 ## 🕰️ Complete Evolution Timeline
 
+![Computing Evolution Timeline](./diagrams/01_computing_evolution_timeline.svg)
+
 ### Visual Timeline Overview
 ```
 1960s    1970s    1980s    1990s    2000s    2010s    2020s
@@ -64,6 +66,8 @@ Computing   Sharing   Systems      Computing Computing  Native   Quantum
 ```
 
 ## 🏗️ Virtualization Technology Evolution
+
+![Virtualization Technology Evolution](./diagrams/02_virtualization_evolution.svg)
 
 ### Virtualization Types and Cloud Platform Adoption
 
@@ -146,6 +150,8 @@ Cloud Usage:
 ```
 
 ## 📦 Container Technology Evolution
+
+![Container Evolution Timeline](./diagrams/03_container_evolution.svg)
 
 ### Container Timeline
 ```
