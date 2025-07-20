@@ -63,19 +63,193 @@ Research Motivation: Create a high-performance hypervisor that:
 
 #### Amazon Web Services (2006-2017)
 ```
-AWS Xen Implementation:
+AWS Xen Implementation Timeline:
 2006: EC2 launch with Xen hypervisor
-2008: Paravirtual (PV) instances
-2010: Hardware Virtual Machine (HVM) instances
-2013: SR-IOV networking support
-2017: Transition to Nitro system begins
+├── Initial focus on paravirtualization (PV)
+├── Custom Xen modifications for multi-tenancy
+├── Domain 0 (Dom0) management domain
+└── Strong isolation for cloud workloads
+
+2008: Hardware Virtual Machine (HVM) Support
+├── Full hardware emulation capability
+├── Support for unmodified operating systems
+├── Windows Server support introduction
+├── Broader OS compatibility
+└── Performance trade-offs vs PV
+
+2010-2013: Enhanced Networking Era
+├── SR-IOV networking support
+├── Enhanced networking for HVM instances
+├── Placement groups for low latency
+├── 10 Gbps networking capabilities
+└── GPU instance support (P2, G2)
+
+2013-2017: Performance Optimization
+├── HVM performance improvements
+├── PV-on-HVM hybrid approach
+├── Enhanced storage (EBS-optimized)
+├── Larger instance types (X1, R4)
+└── Container service preparation (ECS)
+
+2017: Nitro System Transition Begins
+├── Custom silicon development
+├── Offloading virtualization to hardware
+├── Security chip integration
+└── Foundation for next-generation instances
+
+#### AWS Nitro System Deep Dive (2017-Present)
+
+**Nitro System Revolution:**
+```
+2017: Nitro System Architecture
+├── Custom Nitro cards for I/O acceleration
+├── Dedicated security chip (Nitro Security Chip)
+├── Hardware-based root of trust
+├── Hypervisor offloading to silicon
+└── KVM-based lightweight hypervisor
+
+2018: First Nitro Instances (C5, M5)
+├── Up to 25 Gbps enhanced networking
+├── 99%+ bare metal performance
+├── Improved EBS performance (64,000 IOPS)
+├── Support for larger instance sizes
+└── Better price-performance ratio
+
+2019: Nitro Enclaves Introduction
+├── Isolated compute environments
+├── Confidential computing capabilities
+├── Cryptographic attestation
+├── No persistent storage access
+└── Compliance and security workloads
+
+2020-2021: Graviton Integration
+├── ARM-based AWS Graviton processors
+├── Nitro system optimization
+├── 40% better price-performance
+├── Container workload optimization
+└── Kubernetes-native performance
 ```
 
-**Why AWS Chose Xen:**
-- **Open Source**: No licensing costs
-- **Performance**: Near-native performance with paravirtualization
-- **Security**: Strong isolation between tenants
-- **Customization**: Ability to modify hypervisor for cloud needs
+**Nitro Architecture Components:**
+```
+┌─────────────────────────────────────────────────────────┐
+│                Customer Workloads                       │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────────┐  │
+│  │    EC2      │  │  Container  │  │    Lambda       │  │
+│  │ Instances   │  │  Services   │  │   Functions     │  │
+│  └─────────────┘  └─────────────┘  └─────────────────┘  │
+└─────────────┬───────────────────────────────────────────┘
+              │
+┌─────────────▼───────────────────────────────────────────┐
+│              Nitro Hypervisor                           │
+│           (Lightweight KVM)                             │
+│  ┌─────────────────────────────────────────────────┐    │
+│  │         Minimal Overhead                        │    │
+│  │    ┌─────────┐ ┌─────────┐ ┌─────────────────┐  │    │
+│  │    │CPU Mgmt │ │Memory   │ │   Scheduling    │  │    │
+│  │    └─────────┘ └─────────┘ └─────────────────┘  │    │
+│  └─────────────────────────────────────────────────┘    │
+└─────────────┬───────────────────────────────────────────┘
+              │
+┌─────────────▼───────────────────────────────────────────┐
+│                Nitro Cards                              │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────────┐  │
+│  │  Security   │  │  Networking │  │    Storage      │  │
+│  │    Chip     │  │    Card     │  │     Card        │  │
+│  │             │  │             │  │                 │  │
+│  │• Root of    │  │• 100 Gbps   │  │• NVMe SSD      │  │
+│  │  Trust      │  │• SR-IOV     │  │• EBS Opt       │  │
+│  │• Attestation│  │• Enhanced   │  │• 64K IOPS      │  │
+│  │• Encryption │  │  Networking │  │• Low Latency   │  │
+│  └─────────────┘  └─────────────┘  └─────────────────┘  │
+└─────────────┬───────────────────────────────────────────┘
+              │
+┌─────────────▼───────────────────────────────────────────┐
+│              Physical Hardware                          │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────────┐  │
+│  │Intel/AMD    │  │AWS Graviton │  │   Specialized   │  │
+│  │Processors   │  │(ARM-based)  │  │   Hardware      │  │
+│  └─────────────┘  └─────────────┘  └─────────────────┘  │
+└─────────────────────────────────────────────────────────┘
+```
+
+**Container and Serverless Integration:**
+```
+Firecracker MicroVMs (2018):
+├── Built on Nitro technology foundation
+├── Sub-second startup times (<125ms)
+├── Minimal memory footprint (5MB overhead)
+├── Strong isolation for multi-tenant serverless
+├── Foundation for AWS Lambda cold starts
+├── Container-like user experience
+├── VM-level security guarantees
+└── Support for thousands of concurrent functions
+
+AWS Fargate Integration (2017):
+├── Serverless container platform
+├── Nitro-based infrastructure
+├── No EC2 instance management required
+├── Per-second billing granularity
+├── EKS and ECS native integration
+├── Automatic scaling and patching
+├── VPC networking integration
+└── Support for up to 4 vCPU, 30GB memory
+
+EKS Nitro Optimization (2018):
+├── Kubernetes on Nitro instances
+├── Enhanced networking for pod communication
+├── GPU support for ML/AI workloads
+├── Spot instance integration for cost optimization
+├── Fargate serverless pods
+├── Container insights and monitoring
+├── Service mesh (App Mesh) integration
+└── GitOps and CI/CD pipeline support
+```
+```
+
+**Virtualization Types Explained:**
+
+#### Paravirtualization (PV) - 2006-2017
+```
+Technology Details:
+├── Guest OS aware of virtualization
+├── Hypercalls instead of hardware traps
+├── Modified kernel required
+├── Near-native performance (1-3% overhead)
+├── Strong security isolation
+└── Limited OS support (Linux, some Unix)
+
+AWS PV Instance Types:
+├── m1, c1, m2, c3 (legacy)
+├── Optimized for CPU-intensive workloads
+├── Best performance for supported OSes
+└── Gradually phased out by 2017
+```
+
+#### Hardware Virtual Machine (HVM) - 2008-2017
+```
+Technology Details:
+├── Full hardware emulation
+├── Unmodified guest operating systems
+├── Hardware virtualization extensions required
+├── Moderate performance overhead (3-7%)
+├── Broader OS compatibility
+└── Support for Windows and legacy systems
+
+AWS HVM Instance Types:
+├── m3, c4, r3, i2 (transitional)
+├── Support for all major operating systems
+├── Enhanced networking capabilities
+├── GPU and specialized hardware support
+└── Foundation for modern instance types
+```
+
+**Why AWS Chose Xen Initially:**
+- **Open Source**: No licensing costs for massive scale
+- **Paravirtualization**: Superior performance for Linux workloads
+- **Security**: Strong multi-tenant isolation
+- **Customization**: Full control over hypervisor modifications
+- **Academic Credibility**: University of Cambridge research backing
 
 #### Other Cloud Adoptions
 - **Rackspace Cloud**: Xen-based infrastructure (2008-2015)
