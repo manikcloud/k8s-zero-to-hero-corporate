@@ -29,6 +29,16 @@ By the end of this session, you will be able to:
 
 ---
 
+## 🔄 **Docker to Kubernetes Transition**
+
+![Docker to Kubernetes Transition](./docker-to-k8s-transition.svg)
+
+## 🛠️ **Local Kubernetes Development Setup**
+
+![Local Kubernetes Setup](./local-k8s-setup.svg)
+
+---
+
 ## 🔧 **Hands-on Labs**
 
 ### **Lab 1: Kubernetes Cluster Setup**

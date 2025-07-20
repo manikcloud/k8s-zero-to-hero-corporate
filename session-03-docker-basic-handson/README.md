@@ -175,36 +175,17 @@ abc123def456   corporate-web   0.00%     3.5MiB / 7.775GiB     0.04%     1.2kB /
 
 ---
 
-## 📊 **Container vs VM Architecture Comparison**
+## 📊 **Docker Architecture Overview**
 
-```mermaid
-graph TB
-    subgraph "Virtual Machines"
-        VM1[Application A] --> GOS1[Guest OS]
-        VM2[Application B] --> GOS2[Guest OS]
-        VM3[Application C] --> GOS3[Guest OS]
-        GOS1 --> HYP[Hypervisor]
-        GOS2 --> HYP
-        GOS3 --> HYP
-        HYP --> HOS1[Host Operating System]
-        HOS1 --> HW1[Physical Hardware]
-    end
-    
-    subgraph "Containers"
-        APP1[Application A] --> CR[Container Runtime]
-        APP2[Application B] --> CR
-        APP3[Application C] --> CR
-        CR --> HOS2[Host Operating System]
-        HOS2 --> HW2[Physical Hardware]
-    end
-    
-    style VM1 fill:#ffcccc
-    style VM2 fill:#ffcccc
-    style VM3 fill:#ffcccc
-    style APP1 fill:#ccffcc
-    style APP2 fill:#ccffcc
-    style APP3 fill:#ccffcc
-```
+![Docker Architecture](./docker-architecture.svg)
+
+## 🔄 **Container vs VM Architecture Comparison**
+
+![Container vs VM Comparison](./container-vs-vm.svg)
+
+## 🔄 **Docker Container Lifecycle**
+
+![Docker Container Lifecycle](./docker-lifecycle.svg)
 
 ---
 

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1000" height="600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="dockerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0db7ed;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2496ed;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="k8sGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#326ce5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a4480;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="transitionGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0db7ed;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#2ECC71;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#326ce5;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Title -->
+  <text x="500" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#2C3E50">Docker to Kubernetes Transition</text>
+  
+  <!-- Docker Side -->
+  <text x="200" y="70" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#0db7ed">Docker Containers</text>
+  
+  <!-- Docker Container -->
+  <rect x="100" y="90" width="200" height="120" rx="10" fill="url(#dockerGradient)" stroke="#0db7ed" stroke-width="2"/>
+  <text x="200" y="115" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">Docker Container</text>
+  <text x="200" y="135" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="white">nginx:latest</text>
+  <text x="200" y="155" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">Port: 80:8080</text>
+  <text x="200" y="170" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">Volume: /data</text>
+  <text x="200" y="185" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">Env: NODE_ENV=prod</text>
+  
+  <!-- Docker Commands -->
+  <rect x="100" y="230" width="200" height="80" rx="5" fill="#E8F4FD" stroke="#0db7ed" stroke-width="1"/>
+  <text x="200" y="250" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#0db7ed">Docker Commands</text>
+  <text x="110" y="270" font-family="Courier, monospace" font-size="10" fill="#2C3E50">docker run -d nginx</text>
+  <text x="110" y="285" font-family="Courier, monospace" font-size="10" fill="#2C3E50">docker ps</text>
+  <text x="110" y="300" font-family="Courier, monospace" font-size="10" fill="#2C3E50">docker logs container</text>
+  
+  <!-- Transition Arrow -->
+  <path d="M 320 150 L 480 150" stroke="url(#transitionGradient)" stroke-width="6" fill="none" marker-end="url(#arrowhead)"/>
+  <text x="400" y="140" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#2ECC71">Transition</text>
+  <text x="400" y="170" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#27AE60">Container → Pod</text>
+  
+  <!-- Kubernetes Side -->
+  <text x="700" y="70" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#326ce5">Kubernetes Pod</text>
+  
+  <!-- Kubernetes Pod -->
+  <rect x="600" y="90" width="200" height="120" rx="10" fill="url(#k8sGradient)" stroke="#326ce5" stroke-width="2"/>
+  <text x="700" y="115" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">Kubernetes Pod</text>
+  <text x="700" y="135" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="white">nginx:latest</text>
+  <text x="700" y="155" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">Service: ClusterIP</text>
+  <text x="700" y="170" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">Volume: PVC</text>
+  <text x="700" y="185" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">ConfigMap: app-config</text>
+  
+  <!-- Kubernetes Commands -->
+  <rect x="600" y="230" width="200" height="80" rx="5" fill="#E8F0FF" stroke="#326ce5" stroke-width="1"/>
+  <text x="700" y="250" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#326ce5">kubectl Commands</text>
+  <text x="610" y="270" font-family="Courier, monospace" font-size="10" fill="#2C3E50">kubectl run nginx --image=nginx</text>
+  <text x="610" y="285" font-family="Courier, monospace" font-size="10" fill="#2C3E50">kubectl get pods</text>
+  <text x="610" y="300" font-family="Courier, monospace" font-size="10" fill="#2C3E50">kubectl logs pod-name</text>
+  
+  <!-- Comparison Table -->
+  <rect x="50" y="350" width="900" height="220" rx="10" fill="#F8F9FA" stroke="#6C757D" stroke-width="2"/>
+  <text x="500" y="380" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#2C3E50">Docker vs Kubernetes Comparison</text>
+  
+  <!-- Table Headers -->
+  <rect x="70" y="400" width="200" height="30" fill="#34495E"/>
+  <text x="170" y="420" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">Aspect</text>
+  
+  <rect x="270" y="400" width="200" height="30" fill="#0db7ed"/>
+  <text x="370" y="420" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">Docker</text>
+  
+  <rect x="470" y="400" width="200" height="30" fill="#326ce5"/>
+  <text x="570" y="420" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">Kubernetes</text>
+  
+  <rect x="670" y="400" width="200" height="30" fill="#2ECC71"/>
+  <text x="770" y="420" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">Benefits</text>
+  
+  <!-- Table Rows -->
+  <g id="tableRows">
+    <!-- Unit of Deployment -->
+    <rect x="70" y="430" width="200" height="25" fill="white" stroke="#BDC3C7"/>
+    <text x="170" y="447" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#2C3E50">Unit of Deployment</text>
+    
+    <rect x="270" y="430" width="200" height="25" fill="#E8F4FD" stroke="#BDC3C7"/>
+    <text x="370" y="447" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#2C3E50">Container</text>
+    
+    <rect x="470" y="430" width="200" height="25" fill="#E8F0FF" stroke="#BDC3C7"/>
+    <text x="570" y="447" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#2C3E50">Pod (1+ containers)</text>
+    
+    <rect x="670" y="430" width="200" height="25" fill="#D5F4E6" stroke="#BDC3C7"/>
+    <text x="770" y="447" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#2C3E50">Multi-container apps</text>
+    
+    <!-- Networking -->
+    <rect x="70" y="455" width="200" height="25" fill="white" stroke="#BDC3C7"/>
+    <text x="170" y="472" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#2C3E50">Networking</text>
+    
+    <rect x="270" y="455" width="200" height="25" fill="#E8F4FD" stroke="#BDC3C7"/>
+    <text x="370" y="472" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#2C3E50">Port mapping</text>
+    
+    <rect x="470" y="455" width="200" height="25" fill="#E8F0FF" stroke="#BDC3C7"/>
+    <text x="570" y="472" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#2C3E50">Services & Ingress</text>
+    
+    <rect x="670" y="455" width="200" height="25" fill="#D5F4E6" stroke="#BDC3C7"/>
+    <text x="770" y="472" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#2C3E50">Service discovery</text>
+    
+    <!-- Storage -->
+    <rect x="70" y="480" width="200" height="25" fill="white" stroke="#BDC3C7"/>
+    <text x="170" y="497" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#2C3E50">Storage</text>
+    
+    <rect x="270" y="480" width="200" height="25" fill="#E8F4FD" stroke="#BDC3C7"/>
+    <text x="370" y="497" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#2C3E50">Volumes</text>
+    
+    <rect x="470" y="480" width="200" height="25" fill="#E8F0FF" stroke="#BDC3C7"/>
+    <text x="570" y="497" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#2C3E50">PV, PVC, StorageClass</text>
+    
+    <rect x="670" y="480" width="200" height="25" fill="#D5F4E6" stroke="#BDC3C7"/>
+    <text x="770" y="497" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#2C3E50">Dynamic provisioning</text>
+    
+    <!-- Scaling -->
+    <rect x="70" y="505" width="200" height="25" fill="white" stroke="#BDC3C7"/>
+    <text x="170" y="522" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#2C3E50">Scaling</text>
+    
+    <rect x="270" y="505" width="200" height="25" fill="#E8F4FD" stroke="#BDC3C7"/>
+    <text x="370" y="522" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#2C3E50">Manual</text>
+    
+    <rect x="470" y="505" width="200" height="25" fill="#E8F0FF" stroke="#BDC3C7"/>
+    <text x="570" y="522" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#2C3E50">Auto-scaling (HPA)</text>
+    
+    <rect x="670" y="505" width="200" height="25" fill="#D5F4E6" stroke="#BDC3C7"/>
+    <text x="770" y="522" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#2C3E50">Resource-based scaling</text>
+    
+    <!-- Health Monitoring -->
+    <rect x="70" y="530" width="200" height="25" fill="white" stroke="#BDC3C7"/>
+    <text x="170" y="547" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#2C3E50">Health Monitoring</text>
+    
+    <rect x="270" y="530" width="200" height="25" fill="#E8F4FD" stroke="#BDC3C7"/>
+    <text x="370" y="547" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#2C3E50">Health checks</text>
+    
+    <rect x="470" y="530" width="200" height="25" fill="#E8F0FF" stroke="#BDC3C7"/>
+    <text x="570" y="547" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#2C3E50">Probes & self-healing</text>
+    
+    <rect x="670" y="530" width="200" height="25" fill="#D5F4E6" stroke="#BDC3C7"/>
+    <text x="770" y="547" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#2C3E50">Automatic recovery</text>
+  </g>
+  
+  <!-- Arrow marker definition -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2ECC71"/>
+    </marker>
+  </defs>
+</svg>

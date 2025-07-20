@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="dockerBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0db7ed;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2496ed;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="containerGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4CAF50;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#45a049;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="hostOrange" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF9800;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#F57C00;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Title -->
+  <text x="400" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#333">Docker Architecture Overview</text>
+  
+  <!-- Docker Client -->
+  <rect x="50" y="80" width="150" height="80" rx="10" fill="url(#dockerBlue)" stroke="#0db7ed" stroke-width="2"/>
+  <text x="125" y="110" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">Docker Client</text>
+  <text x="125" y="130" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="white">docker build</text>
+  <text x="125" y="145" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="white">docker run</text>
+  
+  <!-- Docker Daemon -->
+  <rect x="300" y="80" width="200" height="120" rx="10" fill="url(#dockerBlue)" stroke="#0db7ed" stroke-width="2"/>
+  <text x="400" y="110" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white">Docker Daemon</text>
+  <text x="400" y="130" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="white">Container Management</text>
+  <text x="400" y="145" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="white">Image Management</text>
+  <text x="400" y="160" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="white">Network Management</text>
+  <text x="400" y="175" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="white">Volume Management</text>
+  
+  <!-- Docker Registry -->
+  <rect x="580" y="80" width="150" height="80" rx="10" fill="url(#dockerBlue)" stroke="#0db7ed" stroke-width="2"/>
+  <text x="655" y="110" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">Docker Registry</text>
+  <text x="655" y="130" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="white">Docker Hub</text>
+  <text x="655" y="145" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="white">Private Registry</text>
+  
+  <!-- Containers -->
+  <g id="containers">
+    <rect x="100" y="280" width="120" height="100" rx="8" fill="url(#containerGreen)" stroke="#4CAF50" stroke-width="2"/>
+    <text x="160" y="305" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">Container 1</text>
+    <text x="160" y="325" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">nginx:latest</text>
+    <text x="160" y="340" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Port: 80:8080</text>
+    <text x="160" y="355" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Status: Running</text>
+    
+    <rect x="250" y="280" width="120" height="100" rx="8" fill="url(#containerGreen)" stroke="#4CAF50" stroke-width="2"/>
+    <text x="310" y="305" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">Container 2</text>
+    <text x="310" y="325" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">mysql:8.0</text>
+    <text x="310" y="340" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Port: 3306</text>
+    <text x="310" y="355" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Status: Running</text>
+    
+    <rect x="400" y="280" width="120" height="100" rx="8" fill="url(#containerGreen)" stroke="#4CAF50" stroke-width="2"/>
+    <text x="460" y="305" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">Container 3</text>
+    <text x="460" y="325" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">redis:alpine</text>
+    <text x="460" y="340" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Port: 6379</text>
+    <text x="460" y="355" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Status: Running</text>
+  </g>
+  
+  <!-- Host Operating System -->
+  <rect x="50" y="420" width="680" height="80" rx="10" fill="url(#hostOrange)" stroke="#FF9800" stroke-width="2"/>
+  <text x="390" y="450" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="white">Host Operating System</text>
+  <text x="390" y="475" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="white">Linux Kernel | Windows | macOS</text>
+  
+  <!-- Physical Hardware -->
+  <rect x="50" y="520" width="680" height="60" rx="10" fill="#666" stroke="#444" stroke-width="2"/>
+  <text x="390" y="545" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white">Physical Hardware</text>
+  <text x="390" y="565" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="white">CPU | Memory | Storage | Network</text>
+  
+  <!-- Arrows -->
+  <!-- Client to Daemon -->
+  <path d="M 200 120 L 290 120" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <text x="245" y="115" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#333">REST API</text>
+  
+  <!-- Daemon to Registry -->
+  <path d="M 500 120 L 570 120" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <text x="535" y="115" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#333">pull/push</text>
+  
+  <!-- Daemon to Containers -->
+  <path d="M 350 200 L 200 270" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <path d="M 400 200 L 310 270" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <path d="M 450 200 L 460 270" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- Arrow marker definition -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
+    </marker>
+  </defs>
+  
+  <!-- Legend -->
+  <g id="legend">
+    <rect x="550" y="220" width="180" height="120" rx="5" fill="white" stroke="#ccc" stroke-width="1"/>
+    <text x="640" y="240" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#333">Components</text>
+    
+    <rect x="560" y="250" width="15" height="15" fill="url(#dockerBlue)"/>
+    <text x="580" y="262" font-family="Arial, sans-serif" font-size="11" fill="#333">Docker Engine</text>
+    
+    <rect x="560" y="270" width="15" height="15" fill="url(#containerGreen)"/>
+    <text x="580" y="282" font-family="Arial, sans-serif" font-size="11" fill="#333">Containers</text>
+    
+    <rect x="560" y="290" width="15" height="15" fill="url(#hostOrange)"/>
+    <text x="580" y="302" font-family="Arial, sans-serif" font-size="11" fill="#333">Host System</text>
+    
+    <rect x="560" y="310" width="15" height="15" fill="#666"/>
+    <text x="580" y="322" font-family="Arial, sans-serif" font-size="11" fill="#333">Hardware</text>
+  </g>
+</svg>

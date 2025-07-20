@@ -29,6 +29,20 @@ By the end of this session, you will be able to:
 
 ---
 
+## 📊 **Dockerfile Best Practices**
+
+![Dockerfile Best Practices](./dockerfile-best-practices.svg)
+
+## 🏗️ **Multi-Stage Build Architecture**
+
+![Multi-Stage Build](./multi-stage-build.svg)
+
+## 🐳 **Docker Compose Multi-Container Architecture**
+
+![Docker Compose Architecture](./docker-compose-architecture.svg)
+
+---
+
 ## 🔧 **Hands-on Labs**
 
 ### **Lab 1: Production-Ready Dockerfile**

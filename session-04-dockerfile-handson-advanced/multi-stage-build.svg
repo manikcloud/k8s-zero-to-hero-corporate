@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1000" height="700" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="buildStage" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3498DB;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2980B9;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="prodStage" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2ECC71;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#27AE60;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="singleStage" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E74C3C;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#C0392B;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Title -->
+  <text x="500" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#2C3E50">Multi-Stage Docker Builds</text>
+  
+  <!-- Single Stage Build (Traditional) -->
+  <text x="200" y="70" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#E74C3C">Single-Stage Build (Traditional)</text>
+  
+  <rect x="50" y="90" width="300" height="250" rx="10" fill="#FADBD8" stroke="#E74C3C" stroke-width="2"/>
+  
+  <!-- Single stage components -->
+  <rect x="70" y="110" width="260" height="40" rx="5" fill="url(#singleStage)" stroke="#C0392B" stroke-width="1"/>
+  <text x="200" y="135" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">FROM node:16</text>
+  
+  <rect x="70" y="160" width="260" height="30" rx="5" fill="#F8D7DA" stroke="#C0392B" stroke-width="1"/>
+  <text x="200" y="180" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#721C24">Install build tools (gcc, make, python)</text>
+  
+  <rect x="70" y="200" width="260" height="30" rx="5" fill="#F8D7DA" stroke="#C0392B" stroke-width="1"/>
+  <text x="200" y="220" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#721C24">Copy source code</text>
+  
+  <rect x="70" y="240" width="260" height="30" rx="5" fill="#F8D7DA" stroke="#C0392B" stroke-width="1"/>
+  <text x="200" y="260" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#721C24">npm install (dev dependencies)</text>
+  
+  <rect x="70" y="280" width="260" height="30" rx="5" fill="#F8D7DA" stroke="#C0392B" stroke-width="1"/>
+  <text x="200" y="300" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#721C24">Build application</text>
+  
+  <!-- Final image size -->
+  <rect x="70" y="360" width="260" height="40" rx="5" fill="#DC3545" stroke="#C0392B" stroke-width="2"/>
+  <text x="200" y="375" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Final Image Size</text>
+  <text x="200" y="390" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">~1.2 GB</text>
+  
+  <!-- Multi-Stage Build -->
+  <text x="700" y="70" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#2ECC71">Multi-Stage Build (Optimized)</text>
+  
+  <!-- Build Stage -->
+  <rect x="550" y="90" width="300" height="180" rx="10" fill="#D5F4E6" stroke="#27AE60" stroke-width="2"/>
+  <text x="700" y="115" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#27AE60">BUILD STAGE</text>
+  
+  <rect x="570" y="130" width="260" height="30" rx="5" fill="url(#buildStage)" stroke="#2980B9" stroke-width="1"/>
+  <text x="700" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">FROM node:16 AS builder</text>
+  
+  <rect x="570" y="170" width="260" height="25" rx="5" fill="#D6EAF8" stroke="#2980B9" stroke-width="1"/>
+  <text x="700" y="187" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#1B4F72">Install build tools</text>
+  
+  <rect x="570" y="200" width="260" height="25" rx="5" fill="#D6EAF8" stroke="#2980B9" stroke-width="1"/>
+  <text x="700" y="217" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#1B4F72">Copy source & build</text>
+  
+  <rect x="570" y="230" width="260" height="25" rx="5" fill="#D6EAF8" stroke="#2980B9" stroke-width="1"/>
+  <text x="700" y="247" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#1B4F72">Create production build</text>
+  
+  <!-- Production Stage -->
+  <rect x="550" y="290" width="300" height="120" rx="10" fill="#D5F4E6" stroke="#27AE60" stroke-width="2"/>
+  <text x="700" y="315" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#27AE60">PRODUCTION STAGE</text>
+  
+  <rect x="570" y="330" width="260" height="25" rx="5" fill="url(#prodStage)" stroke="#27AE60" stroke-width="1"/>
+  <text x="700" y="347" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">FROM node:16-alpine</text>
+  
+  <rect x="570" y="360" width="260" height="25" rx="5" fill="#D5F4E6" stroke="#27AE60" stroke-width="1"/>
+  <text x="700" y="377" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#0E6B0E">COPY --from=builder /app/dist ./</text>
+  
+  <rect x="570" y="385" width="260" height="15" rx="5" fill="#D5F4E6" stroke="#27AE60" stroke-width="1"/>
+  <text x="700" y="395" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#0E6B0E">Only production files</text>
+  
+  <!-- Final image size for multi-stage -->
+  <rect x="570" y="430" width="260" height="40" rx="5" fill="#28A745" stroke="#27AE60" stroke-width="2"/>
+  <text x="700" y="445" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Final Image Size</text>
+  <text x="700" y="460" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">~150 MB</text>
+  
+  <!-- Comparison Arrow -->
+  <path d="M 370 250 L 530 250" stroke="#F39C12" stroke-width="4" fill="none" marker-end="url(#arrowhead)"/>
+  <text x="450" y="240" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#F39C12">87% Size Reduction!</text>
+  
+  <!-- Arrow marker definition -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#F39C12"/>
+    </marker>
+  </defs>
+  
+  <!-- Benefits Box -->
+  <rect x="50" y="500" width="900" height="150" rx="10" fill="#F8F9FA" stroke="#6C757D" stroke-width="2"/>
+  <text x="500" y="530" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#2C3E50">Multi-Stage Build Benefits</text>
+  
+  <!-- Benefits list -->
+  <g id="benefits">
+    <circle cx="80" cy="560" r="5" fill="#28A745"/>
+    <text x="100" y="565" font-family="Arial, sans-serif" font-size="14" fill="#2C3E50"><tspan font-weight="bold">Smaller Images:</tspan> Only production artifacts in final image</text>
+    
+    <circle cx="80" cy="585" r="5" fill="#28A745"/>
+    <text x="100" y="590" font-family="Arial, sans-serif" font-size="14" fill="#2C3E50"><tspan font-weight="bold">Better Security:</tspan> No build tools or source code in production</text>
+    
+    <circle cx="80" y="610" r="5" fill="#28A745"/>
+    <text x="100" y="615" font-family="Arial, sans-serif" font-size="14" fill="#2C3E50"><tspan font-weight="bold">Faster Deployment:</tspan> Smaller images transfer and start faster</text>
+    
+    <circle cx="500" cy="560" r="5" fill="#28A745"/>
+    <text x="520" y="565" font-family="Arial, sans-serif" font-size="14" fill="#2C3E50"><tspan font-weight="bold">Cleaner Separation:</tspan> Build and runtime environments isolated</text>
+    
+    <circle cx="500" cy="585" r="5" fill="#28A745"/>
+    <text x="520" y="590" font-family="Arial, sans-serif" font-size="14" fill="#2C3E50"><tspan font-weight="bold">Cost Effective:</tspan> Reduced storage and bandwidth costs</text>
+    
+    <circle cx="500" cy="610" r="5" fill="#28A745"/>
+    <text x="520" y="615" font-family="Arial, sans-serif" font-size="14" fill="#2C3E50"><tspan font-weight="bold">Compliance Ready:</tspan> Minimal attack surface for security audits</text>
+  </g>
+  
+  <!-- Example Code Box -->
+  <rect x="50" y="670" width="900" height="25" rx="5" fill="#2C3E50"/>
+  <text x="500" y="687" text-anchor="middle" font-family="Courier, monospace" font-size="12" font-weight="bold" fill="white">docker build --target production -t myapp:prod .</text>
+</svg>

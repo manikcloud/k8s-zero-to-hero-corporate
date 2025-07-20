@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1000" height="800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="goodPractice" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2ECC71;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#27AE60;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="badPractice" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E74C3C;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#C0392B;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="headerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3498DB;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2980B9;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Title -->
+  <text x="500" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#2C3E50">Dockerfile Best Practices</text>
+  
+  <!-- Good Practices Section -->
+  <rect x="50" y="70" width="420" height="680" rx="15" fill="#E8F8F5" stroke="#27AE60" stroke-width="3"/>
+  <rect x="50" y="70" width="420" height="50" rx="15" fill="url(#goodPractice)"/>
+  <text x="260" y="100" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white">✓ GOOD PRACTICES</text>
+  
+  <!-- Good Practice Items -->
+  <g id="goodPractices">
+    <!-- Use Official Base Images -->
+    <rect x="70" y="140" width="380" height="60" rx="8" fill="white" stroke="#27AE60" stroke-width="2"/>
+    <text x="80" y="160" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#27AE60">1. Use Official Base Images</text>
+    <text x="80" y="175" font-family="Courier, monospace" font-size="11" fill="#2C3E50">FROM node:16-alpine</text>
+    <text x="80" y="190" font-family="Arial, sans-serif" font-size="10" fill="#7F8C8D">Smaller, secure, and maintained</text>
+    
+    <!-- Multi-stage Builds -->
+    <rect x="70" y="210" width="380" height="60" rx="8" fill="white" stroke="#27AE60" stroke-width="2"/>
+    <text x="80" y="230" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#27AE60">2. Use Multi-stage Builds</text>
+    <text x="80" y="245" font-family="Courier, monospace" font-size="11" fill="#2C3E50">FROM node:16 AS builder</text>
+    <text x="80" y="260" font-family="Arial, sans-serif" font-size="10" fill="#7F8C8D">Reduce final image size significantly</text>
+    
+    <!-- Minimize Layers -->
+    <rect x="70" y="280" width="380" height="60" rx="8" fill="white" stroke="#27AE60" stroke-width="2"/>
+    <text x="80" y="300" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#27AE60">3. Minimize Layers</text>
+    <text x="80" y="315" font-family="Courier, monospace" font-size="11" fill="#2C3E50">RUN apt-get update &amp;&amp; apt-get install -y \</text>
+    <text x="80" y="330" font-family="Arial, sans-serif" font-size="10" fill="#7F8C8D">Combine commands with &amp;&amp;</text>
+    
+    <!-- Use .dockerignore -->
+    <rect x="70" y="350" width="380" height="60" rx="8" fill="white" stroke="#27AE60" stroke-width="2"/>
+    <text x="80" y="370" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#27AE60">4. Use .dockerignore File</text>
+    <text x="80" y="385" font-family="Courier, monospace" font-size="11" fill="#2C3E50">node_modules/</text>
+    <text x="80" y="400" font-family="Arial, sans-serif" font-size="10" fill="#7F8C8D">Exclude unnecessary files</text>
+    
+    <!-- Non-root User -->
+    <rect x="70" y="420" width="380" height="60" rx="8" fill="white" stroke="#27AE60" stroke-width="2"/>
+    <text x="80" y="440" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#27AE60">5. Run as Non-root User</text>
+    <text x="80" y="455" font-family="Courier, monospace" font-size="11" fill="#2C3E50">USER node</text>
+    <text x="80" y="470" font-family="Arial, sans-serif" font-size="10" fill="#7F8C8D">Improve security posture</text>
+    
+    <!-- Specific Tags -->
+    <rect x="70" y="490" width="380" height="60" rx="8" fill="white" stroke="#27AE60" stroke-width="2"/>
+    <text x="80" y="510" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#27AE60">6. Use Specific Tags</text>
+    <text x="80" y="525" font-family="Courier, monospace" font-size="11" fill="#2C3E50">FROM node:16.14.2-alpine</text>
+    <text x="80" y="540" font-family="Arial, sans-serif" font-size="10" fill="#7F8C8D">Ensure reproducible builds</text>
+    
+    <!-- Health Checks -->
+    <rect x="70" y="560" width="380" height="60" rx="8" fill="white" stroke="#27AE60" stroke-width="2"/>
+    <text x="80" y="580" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#27AE60">7. Add Health Checks</text>
+    <text x="80" y="595" font-family="Courier, monospace" font-size="11" fill="#2C3E50">HEALTHCHECK --interval=30s CMD curl -f http://localhost</text>
+    <text x="80" y="610" font-family="Arial, sans-serif" font-size="10" fill="#7F8C8D">Monitor container health</text>
+    
+    <!-- Cache Optimization -->
+    <rect x="70" y="630" width="380" height="60" rx="8" fill="white" stroke="#27AE60" stroke-width="2"/>
+    <text x="80" y="650" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#27AE60">8. Optimize for Cache</text>
+    <text x="80" y="665" font-family="Courier, monospace" font-size="11" fill="#2C3E50">COPY package*.json ./</text>
+    <text x="80" y="680" font-family="Arial, sans-serif" font-size="10" fill="#7F8C8D">Copy dependencies first</text>
+  </g>
+  
+  <!-- Bad Practices Section -->
+  <rect x="530" y="70" width="420" height="680" rx="15" fill="#FDEDEC" stroke="#C0392B" stroke-width="3"/>
+  <rect x="530" y="70" width="420" height="50" rx="15" fill="url(#badPractice)"/>
+  <text x="740" y="100" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white">✗ BAD PRACTICES</text>
+  
+  <!-- Bad Practice Items -->
+  <g id="badPractices">
+    <!-- Using Latest Tag -->
+    <rect x="550" y="140" width="380" height="60" rx="8" fill="white" stroke="#C0392B" stroke-width="2"/>
+    <text x="560" y="160" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#C0392B">1. Using 'latest' Tag</text>
+    <text x="560" y="175" font-family="Courier, monospace" font-size="11" fill="#2C3E50">FROM node:latest</text>
+    <text x="560" y="190" font-family="Arial, sans-serif" font-size="10" fill="#7F8C8D">Unpredictable and unreproducible</text>
+    
+    <!-- Running as Root -->
+    <rect x="550" y="210" width="380" height="60" rx="8" fill="white" stroke="#C0392B" stroke-width="2"/>
+    <text x="560" y="230" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#C0392B">2. Running as Root</text>
+    <text x="560" y="245" font-family="Courier, monospace" font-size="11" fill="#2C3E50"># No USER instruction</text>
+    <text x="560" y="260" font-family="Arial, sans-serif" font-size="10" fill="#7F8C8D">Security vulnerability</text>
+    
+    <!-- Too Many Layers -->
+    <rect x="550" y="280" width="380" height="60" rx="8" fill="white" stroke="#C0392B" stroke-width="2"/>
+    <text x="560" y="300" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#C0392B">3. Too Many Layers</text>
+    <text x="560" y="315" font-family="Courier, monospace" font-size="11" fill="#2C3E50">RUN apt-get update</text>
+    <text x="560" y="330" font-family="Arial, sans-serif" font-size="10" fill="#7F8C8D">Each RUN creates a new layer</text>
+    
+    <!-- Large Base Images -->
+    <rect x="550" y="350" width="380" height="60" rx="8" fill="white" stroke="#C0392B" stroke-width="2"/>
+    <text x="560" y="370" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#C0392B">4. Large Base Images</text>
+    <text x="560" y="385" font-family="Courier, monospace" font-size="11" fill="#2C3E50">FROM ubuntu:20.04</text>
+    <text x="560" y="400" font-family="Arial, sans-serif" font-size="10" fill="#7F8C8D">Unnecessary bloat and attack surface</text>
+    
+    <!-- Hardcoded Secrets -->
+    <rect x="550" y="420" width="380" height="60" rx="8" fill="white" stroke="#C0392B" stroke-width="2"/>
+    <text x="560" y="440" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#C0392B">5. Hardcoded Secrets</text>
+    <text x="560" y="455" font-family="Courier, monospace" font-size="11" fill="#2C3E50">ENV API_KEY=secret123</text>
+    <text x="560" y="470" font-family="Arial, sans-serif" font-size="10" fill="#7F8C8D">Security risk in image layers</text>
+    
+    <!-- No Cache Optimization -->
+    <rect x="550" y="490" width="380" height="60" rx="8" fill="white" stroke="#C0392B" stroke-width="2"/>
+    <text x="560" y="510" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#C0392B">6. Poor Cache Usage</text>
+    <text x="560" y="525" font-family="Courier, monospace" font-size="11" fill="#2C3E50">COPY . .</text>
+    <text x="560" y="540" font-family="Arial, sans-serif" font-size="10" fill="#7F8C8D">Invalidates cache on any change</text>
+    
+    <!-- No Health Checks -->
+    <rect x="550" y="560" width="380" height="60" rx="8" fill="white" stroke="#C0392B" stroke-width="2"/>
+    <text x="560" y="580" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#C0392B">7. No Health Monitoring</text>
+    <text x="560" y="595" font-family="Courier, monospace" font-size="11" fill="#2C3E50"># No HEALTHCHECK instruction</text>
+    <text x="560" y="610" font-family="Arial, sans-serif" font-size="10" fill="#7F8C8D">Can't detect container issues</text>
+    
+    <!-- Ignoring .dockerignore -->
+    <rect x="550" y="630" width="380" height="60" rx="8" fill="white" stroke="#C0392B" stroke-width="2"/>
+    <text x="560" y="650" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#C0392B">8. No .dockerignore</text>
+    <text x="560" y="665" font-family="Courier, monospace" font-size="11" fill="#2C3E50"># Missing .dockerignore file</text>
+    <text x="560" y="680" font-family="Arial, sans-serif" font-size="10" fill="#7F8C8D">Includes unnecessary files</text>
+  </g>
+</svg>

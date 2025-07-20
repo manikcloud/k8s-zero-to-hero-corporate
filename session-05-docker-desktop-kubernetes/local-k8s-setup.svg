@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1000" height="700" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="dockerDesktopGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0db7ed;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2496ed;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="k8sGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#326ce5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a4480;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="alternativeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2ECC71;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#27AE60;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Title -->
+  <text x="500" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#2C3E50">Local Kubernetes Development Setup</text>
+  
+  <!-- Docker Desktop Section -->
+  <rect x="50" y="70" width="400" height="250" rx="15" fill="#E8F4FD" stroke="#0db7ed" stroke-width="3"/>
+  <text x="250" y="100" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#0db7ed">Docker Desktop + Kubernetes</text>
+  
+  <!-- Docker Desktop Components -->
+  <rect x="80" y="120" width="150" height="80" rx="8" fill="url(#dockerDesktopGradient)" stroke="#0db7ed" stroke-width="2"/>
+  <text x="155" y="145" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">Docker Engine</text>
+  <text x="155" y="165" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">Container Runtime</text>
+  <text x="155" y="180" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">Image Management</text>
+  
+  <rect x="270" y="120" width="150" height="80" rx="8" fill="url(#k8sGradient)" stroke="#326ce5" stroke-width="2"/>
+  <text x="345" y="145" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">Kubernetes</text>
+  <text x="345" y="165" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">Single Node Cluster</text>
+  <text x="345" y="180" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">Built-in</text>
+  
+  <!-- Features -->
+  <rect x="80" y="220" width="340" height="80" rx="8" fill="white" stroke="#6C757D" stroke-width="1"/>
+  <text x="250" y="240" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#2C3E50">Features</text>
+  <text x="90" y="260" font-family="Arial, sans-serif" font-size="11" fill="#2C3E50">✓ Easy setup - just enable in settings</text>
+  <text x="90" y="275" font-family="Arial, sans-serif" font-size="11" fill="#2C3E50">✓ Integrated with Docker workflow</text>
+  <text x="90" y="290" font-family="Arial, sans-serif" font-size="11" fill="#2C3E50">✓ kubectl included and configured</text>
+  
+  <!-- Alternative Solutions -->
+  <rect x="550" y="70" width="400" height="250" rx="15" fill="#E8F8F5" stroke="#27AE60" stroke-width="3"/>
+  <text x="750" y="100" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#27AE60">Alternative Local Solutions</text>
+  
+  <!-- Minikube -->
+  <rect x="580" y="120" width="100" height="60" rx="8" fill="url(#alternativeGradient)" stroke="#27AE60" stroke-width="2"/>
+  <text x="630" y="145" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Minikube</text>
+  <text x="630" y="165" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">VM-based</text>
+  
+  <!-- Kind -->
+  <rect x="700" y="120" width="100" height="60" rx="8" fill="url(#alternativeGradient)" stroke="#27AE60" stroke-width="2"/>
+  <text x="750" y="145" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Kind</text>
+  <text x="750" y="165" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Docker-in-Docker</text>
+  
+  <!-- K3s -->
+  <rect x="820" y="120" width="100" height="60" rx="8" fill="url(#alternativeGradient)" stroke="#27AE60" stroke-width="2"/>
+  <text x="870" y="145" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">K3s</text>
+  <text x="870" y="165" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">Lightweight</text>
+  
+  <!-- Comparison -->
+  <rect x="580" y="200" width="340" height="100" rx="8" fill="white" stroke="#6C757D" stroke-width="1"/>
+  <text x="750" y="220" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#2C3E50">When to Use</text>
+  <text x="590" y="240" font-family="Arial, sans-serif" font-size="10" fill="#2C3E50">• Minikube: Full K8s features, addons</text>
+  <text x="590" y="255" font-family="Arial, sans-serif" font-size="10" fill="#2C3E50">• Kind: CI/CD, multi-node testing</text>
+  <text x="590" y="270" font-family="Arial, sans-serif" font-size="10" fill="#2C3E50">• K3s: Edge computing, IoT, minimal resources</text>
+  <text x="590" y="285" font-family="Arial, sans-serif" font-size="10" fill="#2C3E50">• Docker Desktop: Integrated development</text>
+  
+  <!-- Setup Steps -->
+  <rect x="50" y="350" width="900" height="320" rx="15" fill="#F8F9FA" stroke="#6C757D" stroke-width="2"/>
+  <text x="500" y="380" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#2C3E50">Docker Desktop Kubernetes Setup Steps</text>
+  
+  <!-- Step 1 -->
+  <rect x="80" y="400" width="200" height="120" rx="10" fill="#D6EAF8" stroke="#3498DB" stroke-width="2"/>
+  <circle cx="100" cy="420" r="15" fill="#3498DB"/>
+  <text x="100" y="427" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">1</text>
+  <text x="180" y="425" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#2C3E50">Install Docker Desktop</text>
+  <text x="90" y="450" font-family="Arial, sans-serif" font-size="11" fill="#2C3E50">• Download from docker.com</text>
+  <text x="90" y="465" font-family="Arial, sans-serif" font-size="11" fill="#2C3E50">• Install and start</text>
+  <text x="90" y="480" font-family="Arial, sans-serif" font-size="11" fill="#2C3E50">• Verify: docker --version</text>
+  <text x="90" y="495" font-family="Arial, sans-serif" font-size="11" fill="#2C3E50">• Test: docker run hello-world</text>
+  
+  <!-- Step 2 -->
+  <rect x="300" y="400" width="200" height="120" rx="10" fill="#D5F4E6" stroke="#2ECC71" stroke-width="2"/>
+  <circle cx="320" cy="420" r="15" fill="#2ECC71"/>
+  <text x="320" y="427" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">2</text>
+  <text x="400" y="425" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#2C3E50">Enable Kubernetes</text>
+  <text x="310" y="450" font-family="Arial, sans-serif" font-size="11" fill="#2C3E50">• Open Docker Desktop</text>
+  <text x="310" y="465" font-family="Arial, sans-serif" font-size="11" fill="#2C3E50">• Go to Settings/Preferences</text>
+  <text x="310" y="480" font-family="Arial, sans-serif" font-size="11" fill="#2C3E50">• Click Kubernetes tab</text>
+  <text x="310" y="495" font-family="Arial, sans-serif" font-size="11" fill="#2C3E50">• Check "Enable Kubernetes"</text>
+  
+  <!-- Step 3 -->
+  <rect x="520" y="400" width="200" height="120" rx="10" fill="#FCF3CF" stroke="#F39C12" stroke-width="2"/>
+  <circle cx="540" cy="420" r="15" fill="#F39C12"/>
+  <text x="540" y="427" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">3</text>
+  <text x="620" y="425" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#2C3E50">Apply & Restart</text>
+  <text x="530" y="450" font-family="Arial, sans-serif" font-size="11" fill="#2C3E50">• Click "Apply & Restart"</text>
+  <text x="530" y="465" font-family="Arial, sans-serif" font-size="11" fill="#2C3E50">• Wait for installation</text>
+  <text x="530" y="480" font-family="Arial, sans-serif" font-size="11" fill="#2C3E50">• Docker will restart</text>
+  <text x="530" y="495" font-family="Arial, sans-serif" font-size="11" fill="#2C3E50">• K8s cluster starts</text>
+  
+  <!-- Step 4 -->
+  <rect x="740" y="400" width="200" height="120" rx="10" fill="#FADBD8" stroke="#E74C3C" stroke-width="2"/>
+  <circle cx="760" cy="420" r="15" fill="#E74C3C"/>
+  <text x="760" y="427" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">4</text>
+  <text x="840" y="425" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#2C3E50">Verify Setup</text>
+  <text x="750" y="450" font-family="Arial, sans-serif" font-size="11" fill="#2C3E50">• kubectl version --client</text>
+  <text x="750" y="465" font-family="Arial, sans-serif" font-size="11" fill="#2C3E50">• kubectl cluster-info</text>
+  <text x="750" y="480" font-family="Arial, sans-serif" font-size="11" fill="#2C3E50">• kubectl get nodes</text>
+  <text x="750" y="495" font-family="Arial, sans-serif" font-size="11" fill="#2C3E50">• kubectl get pods --all-namespaces</text>
+  
+  <!-- Verification Commands -->
+  <rect x="80" y="540" width="840" height="100" rx="10" fill="#2C3E50" stroke="#1A252F" stroke-width="2"/>
+  <text x="500" y="565" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white">Verification Commands</text>
+  
+  <text x="100" y="590" font-family="Courier, monospace" font-size="12" fill="#F8F9FA">kubectl cluster-info</text>
+  <text x="350" y="590" font-family="Arial, sans-serif" font-size="11" fill="#ADB5BD">Show cluster information</text>
+  
+  <text x="100" y="610" font-family="Courier, monospace" font-size="12" fill="#F8F9FA">kubectl get nodes</text>
+  <text x="350" y="610" font-family="Arial, sans-serif" font-size="11" fill="#ADB5BD">List cluster nodes</text>
+  
+  <text x="500" y="590" font-family="Courier, monospace" font-size="12" fill="#F8F9FA">kubectl run nginx --image=nginx</text>
+  <text x="750" y="590" font-family="Arial, sans-serif" font-size="11" fill="#ADB5BD">Test pod creation</text>
+  
+  <text x="500" y="610" font-family="Courier, monospace" font-size="12" fill="#F8F9FA">kubectl get pods</text>
+  <text x="750" y="610" font-family="Arial, sans-serif" font-size="11" fill="#ADB5BD">List running pods</text>
+</svg>
