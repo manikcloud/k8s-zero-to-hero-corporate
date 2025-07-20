@@ -229,6 +229,13 @@ Market Evolution:
 - [07_Timeline_Chart.md](./07_Timeline_Chart.md) - Detailed cloud computing evolution timeline
 - [08_Architecture_Diagrams.md](./08_Architecture_Diagrams.md) - Technical architecture visualizations
 
+### Interactive Visual Diagrams
+- [📊 Complete Evolution Timeline](./diagrams/01_computing_evolution_timeline.svg) - Visual timeline from 1960s to 2020s
+- [⚡ Virtualization Technology Evolution](./diagrams/02_virtualization_evolution.svg) - VMware, Xen, KVM, Hyper-V progression
+- [📦 Container Evolution Timeline](./diagrams/03_container_evolution.svg) - From chroot to Kubernetes orchestration
+- [🔄 AWS Hypervisor Evolution](./diagrams/04_aws_hypervisor_evolution.svg) - Xen to Nitro System transition
+- [🌐 Cloud Platform Comparison](./diagrams/05_cloud_platform_comparison.svg) - Hypervisor choices across cloud providers
+
 ## 🔍 Virtualization Technology Matrix
 
 ### Cloud Platform Hypervisor Usage
